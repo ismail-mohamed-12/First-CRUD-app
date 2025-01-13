@@ -45,15 +45,20 @@ public class UserService{
         Optional<Users> user= userRepository.findUsersById(id);
         if (user.isPresent()){
             user.get().setEmail(newEmail);
+            userRepository.save(user.get());
             return newEmail;
         }
         throw new NoSuchElementException("the user couldn't be found so we couldn't update");
     }
 
     public String deleteUser ( long id){
+        Optional<Users> user = userRepository.findUsersById(id);
+        if(user.isPresent()){
+            userRepository.deleteById(id);
+            return "user was successful deleted";
+        }
+        throw new NoSuchElementException("the user's id doesn't exist");
 
-
-        userRepository.deleteById(id);
     }
 
 

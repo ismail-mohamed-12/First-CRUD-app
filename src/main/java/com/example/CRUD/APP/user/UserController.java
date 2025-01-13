@@ -21,7 +21,7 @@ public class UserController {
     //create a user
     @PostMapping()
     public void CreateUser (@RequestBody Users user){
-        long id = user.getId();
+
 
         userService.createUser(user);
 
@@ -55,7 +55,13 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable long id){
-        Users user = userService.deleteUser(id);
+
+        try{
+            return ResponseEntity.ok(userService.deleteUser(id));
+        }catch (Exception e ){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("an error occurred"+e.getMessage());
+        }
+
     }
 
 

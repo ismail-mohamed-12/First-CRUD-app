@@ -10,8 +10,9 @@ import java.util.Set;
 public interface UserRepository extends JpaRepository <Users,Long>{
 
     Optional<Users> findUsersById(long id);
-    Optional<Users> findUsersByName (String name);
     Optional<Users> deleteById(long id);
+
+
 
 
 
